@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<link href="main.css" rel="stylesheet" type="text/css" />
+<script src='https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js'></script>
+<script src='https://cdn.bootcss.com/jquery/1.11.3/jquery.js'></script>
+</head>
+
+
+<script>
+$(document).ready(function () {
+    // 连接服务端
+    var socket = io('http://27.155.105.165:2124');
+    // 连接后登录
+    socket.on('connect', function(){
+    	socket.emit('join_group', '2001');
+    });
+    // 后端推送来消息时
+    socket.on('new_msg', function(msg){
+        console.log(msg);
+         // $('#content').html('收到消息：'+msg);
+         // $('.notification.sticky').notify();
+    });
+    // 后端推送来在线数据时
+    socket.on('open_number', function(msg){
+        console.log(msg);
+    });
+});
+</script>
+
+</body>
+</html>
